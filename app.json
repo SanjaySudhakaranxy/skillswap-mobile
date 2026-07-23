@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "SkillSwap",
+    "slug": "skillswap",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0b1020"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.skillswap.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#0b1020"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d27a34eb-daa5-40ee-9897-8f501b30e377"
+      }
+    }
+  }
+}
