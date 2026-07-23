@@ -1,0 +1,26 @@
+TestCaseID,Module,Description,Preconditions,Steps,ExpectedResult,Status
+TC001,Authentication,Login with valid credentials,User exists in Supabase database,"1. Open app 2. Enter valid email 3. Enter valid password 4. Tap Login",User is navigated to the Dashboard screen,Pending
+TC002,Authentication,Login with invalid email,None,"1. Open app 2. Enter invalid email 3. Enter any password 4. Tap Login",Error message displayed indicating invalid credentials,Pending
+TC003,Authentication,Login with invalid password,User exists,"1. Open app 2. Enter valid email 3. Enter wrong password 4. Tap Login",Error message displayed indicating invalid credentials,Pending
+TC004,Authentication,Login with empty fields,None,"1. Open app 2. Leave email/password empty 3. Tap Login",Validation error prompts user to fill fields,Pending
+TC005,Dashboard,View Dashboard Balance,User is logged in,"1. Navigate to Dashboard",Dashboard displays correct token balance synced from backend,Pending
+TC006,Dashboard,Pull to refresh Dashboard,User is logged in,"1. Navigate to Dashboard 2. Swipe down",Balance and recent activity refresh from the database,Pending
+TC007,Browse,View list of teachers/skills,User is logged in,"1. Navigate to Browse tab",A list of available users/skills is displayed,Pending
+TC008,Browse,Select a teacher,User is logged in,"1. Navigate to Browse tab 2. Tap on a teacher profile",Navigates to the TeacherScreen with their details,Pending
+TC009,Teacher,View teacher details,User is on TeacherScreen,"1. Look at Teacher details",Shows teacher name, skills, and token rate,Pending
+TC010,Teacher,Request a session,User has enough tokens,"1. On TeacherScreen 2. Enter date/time 3. Tap Request Session",Session is requested and token balance is deducted,Pending
+TC011,Teacher,Request session without enough tokens,User has insufficient tokens,"1. On TeacherScreen 2. Tap Request Session",Error message indicating insufficient tokens,Pending
+TC012,Teacher,Request session with empty time,User is on TeacherScreen,"1. Leave time blank 2. Tap Request Session",Validation error for missing time,Pending
+TC013,Sessions,View Pending Sessions,User requested a session,"1. Navigate to Sessions tab",Pending requested session is displayed,Pending
+TC014,Sessions,Accept a session request,User is a teacher receiving a request,"1. Go to Sessions 2. Tap Accept on a pending request",Session moves to Accepted state,Pending
+TC015,Sessions,Decline a session request,User is a teacher receiving a request,"1. Go to Sessions 2. Tap Decline on a pending request",Session is canceled and tokens refunded to requester,Pending
+TC016,Sessions,Cancel an accepted session,User has an accepted session,"1. Go to Sessions 2. Tap Cancel on an accepted session",Session is canceled, tokens refunded,Pending
+TC017,Sessions,Complete a session,User has an accepted session,"1. Go to Sessions 2. Tap Complete",Session is marked complete, tokens transferred to teacher,Pending
+TC018,Wallet,View Wallet Balance,User is logged in,"1. Navigate to Wallet tab",Current token balance is displayed,Pending
+TC019,Wallet,View Transaction History,User is logged in,"1. Navigate to Wallet tab",List of past token transactions (transfers/refunds) is shown,Pending
+TC020,Wallet,Pull to refresh Wallet,User is logged in,"1. Navigate to Wallet tab 2. Swipe down",Transaction history and balance update,Pending
+TC021,Profile,View User Profile,User is logged in,"1. Navigate to Profile tab",Shows current user name, email, and listed skills,Pending
+TC022,Profile,Log out,User is logged in,"1. Navigate to Profile tab 2. Tap Logout",User is logged out and returned to Login screen,Pending
+TC023,Navigation,Tab Navigation,User is logged in,"1. Tap through Dashboard, Browse, Sessions, Wallet, Profile tabs",Screens change smoothly without crashing,Pending
+TC024,Data Sync,Cross-client balance check,User logged in on web and mobile,"1. Request session on mobile 2. Check web app",Balance and session state are identical on both platforms,Pending
+TC025,Error Handling,Network failure on data load,Device offline,"1. Turn off internet 2. Open app 3. Try to navigate",Appropriate network error message is displayed,Pending
