@@ -7,6 +7,7 @@ exports.config = {
     exclude: [],
     maxInstances: 1,
     capabilities: [{
+        maxInstances: 1,
         platformName: 'Android',
         'appium:automationName': 'UIAutomator2',
         'appium:app': './android/app/build/outputs/apk/release/app-release.apk',
