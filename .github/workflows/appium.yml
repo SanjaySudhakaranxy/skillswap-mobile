@@ -40,6 +40,10 @@ jobs:
           mkdir -p reports/junit
           JEST_JUNIT_OUTPUT_DIR=reports/junit JEST_JUNIT_OUTPUT_NAME=unit-tests.xml npm run test:unit
 
+      - name: Write test summary
+        if: always()
+        run: |
+          node -e "const fs=require('fs'); const xml=fs.readFileSync('reports/junit/unit-tests.xml','utf8'); const attrs=Object.fromEntries([...xml.matchAll(/(tests|failures|errors|skipped)=\"(\d+)\"/g)].map(([,k,v])=>[k,v])); const total=Number(attrs.tests||0), failed=Number(attrs.failures||0)+Number(attrs.errors||0), skipped=Number(attrs.skipped||0), passed=total-failed-skipped; fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Test Summary\n\n| Passed | Failed | Skipped | Total |\n| ---: | ---: | ---: | ---: |\n| '+passed+' | '+failed+' | '+skipped+' | '+total+' |\n');"
       - name: Upload test report
         uses: actions/upload-artifact@v4
         if: always()
