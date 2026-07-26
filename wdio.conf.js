@@ -9,12 +9,7 @@ exports.config = {
     capabilities: [{
         platformName: 'Android',
         'appium:automationName': 'UIAutomator2',
-        // Update these depending on the Expo build/app context
-        // For testing a standalone APK built via EAS:
-        // 'appium:app': 'path/to/your/app.apk',
-        // For Expo Go:
-        // 'appium:appPackage': 'host.exp.exponent',
-        // 'appium:appActivity': 'host.exp.exponent.LauncherActivity',
+        'appium:app': './android/app/build/outputs/apk/release/app-release.apk',
         'appium:noReset': true,
         'appium:fullReset': false,
     }],
@@ -24,7 +19,7 @@ exports.config = {
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
-    services: [],
+    services: ['appium'],
     framework: 'mocha',
     reporters: ['spec', ['junit', {
         outputDir: './reports/junit',
