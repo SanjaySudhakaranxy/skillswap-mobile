@@ -12,6 +12,8 @@ exports.config = {
         'appium:app': './android/app/build/outputs/apk/release/app-release.apk',
         'appium:noReset': true,
         'appium:fullReset': false,
+        'appium:uiautomator2ServerInstallTimeout': 60000,
+        'appium:androidInstallTimeout': 120000,
     }],
     logLevel: 'info',
     bail: 0,

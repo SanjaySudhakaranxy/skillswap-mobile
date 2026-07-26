@@ -41,10 +41,12 @@ jobs:
           profile: Nexus 6
           script: |
             npm i -g appium@next
-            appium driver install uiautomator2 || true
+            appium driver install uiautomator2
             appium &
+            APPIUM_PID=$!
             sleep 10
             npm run test:e2e
+            kill $APPIUM_PID || true
           
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
