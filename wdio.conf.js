@@ -10,7 +10,7 @@ exports.config = {
         maxInstances: 1,
         platformName: 'Android',
         'appium:automationName': 'UIAutomator2',
-        'appium:app': './android/app/build/outputs/apk/release/app-release.apk',
+        'appium:app': './android/app/build/outputs/apk/debug/app-debug.apk',
         'appium:noReset': true,
         'appium:fullReset': false,
         'appium:uiautomator2ServerInstallTimeout': 60000,

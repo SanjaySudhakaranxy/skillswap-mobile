@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 20
     
     steps:
       - name: Checkout repository
@@ -21,6 +21,9 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Install dependencies
         run: npm ci || npm install
 
@@ -30,7 +33,7 @@ jobs:
       - name: Build Android APK
         run: |
           cd android
-          ./gradlew assembleRelease
+          ./gradlew assembleDebug --build-cache
         
       - name: Run Appium Tests in Emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -43,10 +46,8 @@ jobs:
             npm i -g appium@2.19.0
             appium driver install uiautomator2@4.2.9
             appium &
-            APPIUM_PID=$!
             sleep 10
             npm run test:e2e
-            kill $APPIUM_PID || true
           
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
@@ -59,5 +60,5 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: app-release-apk
-          path: android/app/build/outputs/apk/release/app-release.apk
+          name: app-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
