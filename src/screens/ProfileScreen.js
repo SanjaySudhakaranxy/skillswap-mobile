@@ -8,17 +8,13 @@ import Chip from "../components/Chip";
 import Field from "../components/Field";
 import Button from "../components/Button";
 import TabBar from "../components/TabBar";
+import { addSkill, removeSkill, validateProfile } from "../lib/appLogic";
 
 function SkillEditor({ label, value, onChange, placeholder, max = 5 }) {
   const [text, setText] = useState("");
 
   function add() {
-    const skill = text.trim().toLowerCase();
-    if (!skill || value.length >= max || value.includes(skill)) {
-      setText("");
-      return;
-    }
-    onChange([...value, skill]);
+    onChange(addSkill(value, text, max));
     setText("");
   }
 
@@ -50,7 +46,7 @@ function SkillEditor({ label, value, onChange, placeholder, max = 5 }) {
 
       <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         {value.map((s) => (
-          <Chip key={s} label={s} onRemove={() => onChange(value.filter((x) => x !== s))} />
+          <Chip key={s} label={s} onRemove={() => onChange(removeSkill(value, s))} />
         ))}
       </View>
     </View>
@@ -93,18 +89,16 @@ export default function ProfileScreen({ navigation }) {
   async function save() {
     setError("");
     setMessage("");
-    if (!name.trim()) return setError("Name cannot be empty.");
-
-    const costNum = parseInt(cost, 10);
-    if (isNaN(costNum) || costNum < 0 || costNum > 500)
-      return setError("Cost per session must be a number between 0 and 500.");
+    const validation = validateProfile({ name, cost });
+    if (validation.error) return setError(validation.error);
+    const { name: normalizedName, cost: costNum } = validation.value;
 
     setSaving(true);
     const { data: auth } = await supabase.auth.getUser();
     const { error } = await supabase
       .from("profiles")
       .update({
-        name: name.trim(),
+        name: normalizedName,
         bio: bio.trim(),
         cost_per_session: costNum,
         teach_skills: teach,

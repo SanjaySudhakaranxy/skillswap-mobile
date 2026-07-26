@@ -8,6 +8,7 @@ import Card from "../components/Card";
 import Field from "../components/Field";
 import Button from "../components/Button";
 import TabBar from "../components/TabBar";
+import { filterSessions } from "../lib/appLogic";
 
 const TABS = ["pending", "accepted", "completed", "declined"];
 
@@ -74,7 +75,7 @@ export default function SessionsScreen({ navigation }) {
     await load();
   }
 
-  const visible = sessions.filter((s) => s.status === tab);
+  const visible = filterSessions(sessions, tab);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>

@@ -8,6 +8,7 @@ import Card from "../components/Card";
 import Chip from "../components/Chip";
 import Field from "../components/Field";
 import TabBar from "../components/TabBar";
+import { filterTeachers } from "../lib/appLogic";
 
 export default function BrowseScreen({ navigation }) {
   const [teachers, setTeachers] = useState([]);

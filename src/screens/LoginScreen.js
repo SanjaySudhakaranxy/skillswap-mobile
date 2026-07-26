@@ -11,6 +11,7 @@ import {
 
 import { supabase } from "../lib/supabase";
 import { colors } from "../theme";
+import { validateAuthInput } from "../lib/appLogic";
 import Field from "../components/Field";
 import Button from "../components/Button";
 import Card from "../components/Card";

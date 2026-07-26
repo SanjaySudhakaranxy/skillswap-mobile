@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import Chip from "../components/Chip";
 import Field from "../components/Field";
 import Button from "../components/Button";
+import { parsePreferredTime } from "../lib/appLogic";
 
 export default function TeacherScreen({ route, navigation }) {
   const { teacherId } = route.params;
@@ -51,7 +52,7 @@ export default function TeacherScreen({ route, navigation }) {
     setError("");
     if (!skill) return setError("Pick a skill.");
 
-    const scheduled = parseWhen();
+    const scheduled = parsePreferredTime(when);
     if (scheduled === "invalid")
       return setError("Time must look like 2026-08-01 18:30, or leave it empty.");
 

@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase";
 import { colors } from "../theme";
 import Card from "../components/Card";
 import TabBar from "../components/TabBar";
+import { calculateWalletTotals, transactionLabel } from "../lib/appLogic";
 
 const LABELS = {
   welcome: "Welcome bonus",
@@ -87,7 +88,7 @@ export default function WalletScreen({ navigation }) {
             <Card key={t.id}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={{ flex: 1, paddingRight: 10 }}>
-                  <Text style={styles.txTitle}>{LABELS[t.type] || t.type}</Text>
+                  <Text style={styles.txTitle}>{transactionLabel(t.type)}</Text>
                   <Text style={styles.txMeta}>
                     {t.note ? t.note + " - " : ""}
                     {new Date(t.created_at).toLocaleString()}
