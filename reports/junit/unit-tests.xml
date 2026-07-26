@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="45" failures="0" errors="0" time="1.253">
+  <testsuite name="SkillSwap business rules" errors="0" failures="0" skipped="0" timestamp="2026-07-26T19:16:29" time="1.051" tests="45">
+    <testcase classname="SkillSwap business rules 01 rejects empty email" name="SkillSwap business rules 01 rejects empty email" time="0.009">
+    </testcase>
+    <testcase classname="SkillSwap business rules 02 rejects empty password" name="SkillSwap business rules 02 rejects empty password" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 03 rejects short password" name="SkillSwap business rules 03 rejects short password" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 04 accepts valid sign in" name="SkillSwap business rules 04 accepts valid sign in" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 05 signup requires a name" name="SkillSwap business rules 05 signup requires a name" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 06 accepts named signup" name="SkillSwap business rules 06 accepts named signup" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 07 normalizes skill casing" name="SkillSwap business rules 07 normalizes skill casing" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 08 adds a valid skill" name="SkillSwap business rules 08 adds a valid skill" time="0.005">
+    </testcase>
+    <testcase classname="SkillSwap business rules 09 ignores empty skills" name="SkillSwap business rules 09 ignores empty skills" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 10 blocks duplicate skills" name="SkillSwap business rules 10 blocks duplicate skills" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 11 respects skill maximum" name="SkillSwap business rules 11 respects skill maximum" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 12 removes a skill" name="SkillSwap business rules 12 removes a skill" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 13 keeps skills when removing missing value" name="SkillSwap business rules 13 keeps skills when removing missing value" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 14 profile requires a name" name="SkillSwap business rules 14 profile requires a name" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 15 profile rejects non-numeric cost" name="SkillSwap business rules 15 profile rejects non-numeric cost" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 16 profile rejects negative cost" name="SkillSwap business rules 16 profile rejects negative cost" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 17 profile rejects excessive cost" name="SkillSwap business rules 17 profile rejects excessive cost" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 18 profile accepts free session" name="SkillSwap business rules 18 profile accepts free session" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 19 profile trims the name" name="SkillSwap business rules 19 profile trims the name" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 20 empty preferred time is optional" name="SkillSwap business rules 20 empty preferred time is optional" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 21 invalid preferred time is rejected" name="SkillSwap business rules 21 invalid preferred time is rejected" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 22 valid preferred time becomes ISO" name="SkillSwap business rules 22 valid preferred time becomes ISO" time="0.002">
+    </testcase>
+    <testcase classname="SkillSwap business rules 23 teacher search returns all for blank query" name="SkillSwap business rules 23 teacher search returns all for blank query" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 24 teacher search finds name" name="SkillSwap business rules 24 teacher search finds name" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 25 teacher search ignores name case" name="SkillSwap business rules 25 teacher search ignores name case" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 26 teacher search finds skill" name="SkillSwap business rules 26 teacher search finds skill" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 27 teacher search supports partial skills" name="SkillSwap business rules 27 teacher search supports partial skills" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 28 teacher search returns no unmatched results" name="SkillSwap business rules 28 teacher search returns no unmatched results" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 29 wallet totals start at zero" name="SkillSwap business rules 29 wallet totals start at zero" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 30 wallet tracks teaching earnings" name="SkillSwap business rules 30 wallet tracks teaching earnings" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 31 wallet tracks learning spend" name="SkillSwap business rules 31 wallet tracks learning spend" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 32 wallet ignores positive non-earnings" name="SkillSwap business rules 32 wallet ignores positive non-earnings" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 33 wallet aggregates mixed transactions" name="SkillSwap business rules 33 wallet aggregates mixed transactions" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 34 labels welcome transactions" name="SkillSwap business rules 34 labels welcome transactions" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 35 labels teaching earnings" name="SkillSwap business rules 35 labels teaching earnings" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 36 preserves unknown transaction label" name="SkillSwap business rules 36 preserves unknown transaction label" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 37 filters pending sessions" name="SkillSwap business rules 37 filters pending sessions" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 38 filters accepted sessions" name="SkillSwap business rules 38 filters accepted sessions" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 39 counts every session status" name="SkillSwap business rules 39 counts every session status" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 40 identifies teacher role" name="SkillSwap business rules 40 identifies teacher role" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 41 identifies learner role" name="SkillSwap business rules 41 identifies learner role" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 42 finds learner as teacher&apos;s counterpart" name="SkillSwap business rules 42 finds learner as teacher&apos;s counterpart" time="0.001">
+    </testcase>
+    <testcase classname="SkillSwap business rules 43 finds teacher as learner&apos;s counterpart" name="SkillSwap business rules 43 finds teacher as learner&apos;s counterpart" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 44 reports confirmation state by viewer" name="SkillSwap business rules 44 reports confirmation state by viewer" time="0">
+    </testcase>
+    <testcase classname="SkillSwap business rules 45 assigns session coin direction" name="SkillSwap business rules 45 assigns session coin direction" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>
