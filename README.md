@@ -1,106 +1,130 @@
-# SkillSwap Mobile — Phase 3
+# SkillSwap Mobile
 
-Expo SDK 51 + React Navigation (native stack) + Supabase. Android APK via EAS Build.
-No Android Studio required. Same Supabase project as the web app.
+SkillSwap is an Expo/React Native app for exchanging skills through scheduled learning sessions and SkillCoins. It uses Supabase for authentication and data, and supports Android builds through Expo or the GitHub Actions workflow.
 
-## File tree
+## Features
 
-```
-skillswap-mobile/
-  package.json
-  app.json
-  eas.json                  -> preview profile builds an APK
-  babel.config.js
-  App.js                    -> navigation + auth session gate
-  src/
-    theme.js
-    lib/supabase.js         -> PASTE YOUR KEYS HERE
-    components/
-      Button.js  Field.js  Card.js  Chip.js  TabBar.js
-    screens/
-      LoginScreen.js
-      DashboardScreen.js
-      BrowseScreen.js
-      TeacherScreen.js
-      SessionsScreen.js
-      WalletScreen.js
-      ProfileScreen.js
-```
+- Email/password sign-in and sign-up
+- Dashboard for SkillCoin balance, completed sessions, and upcoming sessions
+- Teacher search by name or skill
+- Session requests, teacher approval, completion confirmation, and refunds
+- Wallet transaction history
+- Editable user profile, skills, bio, and session cost
 
-## Step 1 — paste your Supabase keys (do this FIRST)
+## Tech stack
 
-Open `src/lib/supabase.js`. Replace these two lines with your real values:
+- Expo SDK 51 and React Native 0.74
+- React Navigation native stack
+- Supabase authentication and database
+- Jest for unit tests
+- GitHub Actions for automated tests and Android debug APK artifacts
 
-```js
-const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
-```
+## Prerequisites
 
-Same project as the web app. Anon public key only.
-If you skip this, the app builds fine and then fails to log in — the exact bug
-you hit last time.
+- Node.js 20 or later
+- npm
+- A Supabase project configured for SkillSwap
+- Expo Go on an Android device, or an Android emulator, for local app testing
 
-## Step 2 — install
+## Install and run
 
-```
-cd C:\Users\you\projects\skillswap-mobile
+```bash
 npm install
+npm start
 ```
 
-## Step 3 — test on your phone before building the APK
+Scan the Expo QR code with Expo Go, or start Android directly:
 
-```
-npx expo start
-```
-
-Install "Expo Go" from the Play Store, scan the QR code in the terminal.
-The whole app runs live and reloads on save. Do all your testing here — an EAS
-build takes 10-15 minutes, Expo Go takes 3 seconds.
-
-Log in with the same account you made on the web app. Your balance and sessions
-should match exactly, because it is the same database.
-
-## Step 4 — build the APK
-
-```
-npm install -g eas-cli
-eas login
-eas build:configure
-eas build -p android --profile preview
+```bash
+npm run android
 ```
 
-`eas build:configure` fills in the `projectId` in `app.json` automatically.
-The build runs on Expo's servers. When it finishes, the terminal prints a
-download URL. Open it on your phone, download the `.apk`, tap it, allow
-"install from unknown sources", done.
+## Configure Supabase
 
-## Step 5 — verify
+Update the Supabase URL and anonymous key in [src/lib/supabase.js](src/lib/supabase.js). Use the project's **anon/public** key only�never put a service-role key in the mobile app.
 
-On the APK (not Expo Go):
-1. Log in as an existing web account.
-2. Dashboard shows the same balance as the web app.
-3. Browse shows the other account.
-4. Request a session -> balance drops immediately.
-5. Open the web app -> the same request is sitting in Sessions -> Pending.
+The app expects Supabase data for profiles, sessions, and transactions, plus the RPC functions used by the screens:
 
-That cross-checks both clients against one backend, which is the whole point.
+- `request_session`
+- `respond_session`
+- `confirm_session`
 
-## Notes and known limits
+## Testing
 
-- Data loads on screen focus, not in realtime. Pull down to refresh on
-  Dashboard and Wallet; navigating away and back refreshes the others.
-- Scheduled time is a plain text field in `YYYY-MM-DD HH:MM` format. A native
-  date picker needs `@react-native-community/datetimepicker`, which is one more
-  dependency and one more thing to break. Text is fine for MVP.
-- Navigation is a native stack plus a custom bottom `TabBar` component. This
-  keeps the dependency list to exactly what you specified.
-- No HTML form tags anywhere. Every action is a `TouchableOpacity` with `onPress`.
+The project includes 45 unit tests for authentication validation, profile and skill rules, time parsing, teacher search, wallet calculations, transaction labels, and session-state logic.
 
-## Common errors
+```bash
+npm run test:unit
+```
 
-- **Blank white screen on launch** -> placeholder keys still in `src/lib/supabase.js`.
-- **"Network request failed"** -> wrong Supabase URL, or phone has no internet.
-- **Login works on web but not mobile** -> "Confirm email" is still ON in Supabase.
-- **`URL.protocol is not implemented`** -> the `react-native-url-polyfill/auto`
-  import was moved or deleted. It must be the first line of `src/lib/supabase.js`.
-- **`eas build` fails on the `projectId`** -> run `eas build:configure` first.
+The command reports the result in the terminal. To generate a JUnit XML report locally:
+
+```bash
+JEST_JUNIT_OUTPUT_DIR=reports/junit JEST_JUNIT_OUTPUT_NAME=unit-tests.xml npm run test:unit
+```
+
+On PowerShell:
+
+```powershell
+$env:JEST_JUNIT_OUTPUT_DIR='reports/junit'
+$env:JEST_JUNIT_OUTPUT_NAME='unit-tests.xml'
+npm run test:unit
+```
+
+## Continuous integration
+
+The workflow in [.github/workflows/appium.yml](.github/workflows/appium.yml) has a 10-minute timeout and runs on pushes and pull requests to `main`.
+
+It performs the following work:
+
+1. Installs dependencies.
+2. Generates the Android project.
+3. Builds the debug APK.
+4. Runs the 45 unit tests.
+5. Publishes a workflow summary and uploads artifacts.
+
+Artifacts available from each run:
+
+- `app-debug-apk` � `app-debug.apk`
+- `test-report` � JUnit XML test report
+
+## Project structure
+
+```text
+App.js                 Authentication gate and navigation
+src/components/        Shared UI components
+src/screens/           App screens
+src/lib/appLogic.js    Reusable, unit-tested business rules
+src/lib/supabase.js    Supabase client configuration
+test/unit/             45 Jest unit tests
+.github/workflows/     CI workflow
+```
+
+## Android APK
+
+The easiest way to obtain a debug APK is from the `app-debug-apk` artifact in a successful GitHub Actions run.
+
+For a local Android build, first generate the native project, then build it:
+
+```bash
+npx expo prebuild --platform android
+cd android
+./gradlew assembleDebug
+```
+
+The generated APK is located at:
+
+```text
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+## Troubleshooting
+
+- **Login or data loading fails:** verify the Supabase URL/key and device internet connection.
+- **Android build fails:** delete the generated `android` directory only if you intend to regenerate it, then run `npx expo prebuild --platform android` again.
+- **CI artifact is missing:** open the workflow run and check the build step before the upload step.
+- **Tests fail:** run `npm run test:unit` locally and use the failed test name to locate the relevant rule in `src/lib/appLogic.js`.
+
+## License
+
+This repository is private unless a license is added.
