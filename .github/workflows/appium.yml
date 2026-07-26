@@ -40,7 +40,7 @@ jobs:
           arch: x86
           profile: Nexus 6
           script: |
-            npm i -g appium
+            npm i -g appium@next
             appium driver install uiautomator2 || true
             appium &
             sleep 10
