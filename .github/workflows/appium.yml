@@ -41,7 +41,7 @@ jobs:
           profile: Nexus 6
           script: |
             npm i -g appium
-            appium driver install uiautomator2
+            appium driver install uiautomator2 || true
             appium &
             sleep 10
             npm run test:e2e
